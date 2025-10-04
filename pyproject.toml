@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "fastapi[standard]>=0.118.0",
+    "pydantic-settings>=2.11.0",
 ]
 
 [[tool.uv.index]]
