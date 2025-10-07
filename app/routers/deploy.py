@@ -16,7 +16,7 @@ router = APIRouter(prefix="/deploy", dependencies=[Depends(authorize)])
 
 
 @router.post("/submit")
-async def deploy_submit(
+def deploy_submit(
     project: Annotated[str, Form(pattern=r"^[a-z][0-9a-z-]+$")],
     short_sha: Annotated[str, Form(pattern=r"^[0-9a-f]{8}$")],
     file_hash: Annotated[str, Form(pattern=r"^[0-9a-f]{64}$")],

@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "fastapi[standard]>=0.118.0",
+    "langchain[openai]>=0.3.27",
     "pillow>=11.3.0",
     "pydantic-settings>=2.11.0",
 ]
@@ -17,6 +18,3 @@ url = "https://mirrors.aliyun.com/pypi/simple/"
 dev = [
     "ruff>=0.13.3",
 ]
-
-[project.scripts]
-cli = "cli.main:cli"
