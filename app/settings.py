@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     HMAC_SECRET: str
     DEPLOY_BASE: str
 
+    OPENAI_BASE_URL: str
+    OPENAI_API_KEY: str
+
 
 @lru_cache
 def get_settings():
