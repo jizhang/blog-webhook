@@ -7,6 +7,7 @@ from app.services.deploy import DeployService
 from fastapi import APIRouter, Depends, File, Form, HTTPException, status
 
 from app.settings import SettingsDep
+from app.auth import authorize
 
 router = APIRouter(prefix="/deploy", )
 
@@ -15,8 +16,8 @@ ShortShaInput = Annotated[str, Form(pattern=r"^[0-9a-f]{8}$")]
 HashInput = Annotated[str, Form(pattern=r"^[0-9a-f]{64}$")]
 
 
-@router.post("/signed")
-def deploy_signed(
+@router.post("/with-hmac")
+def deploy_with_hmac(
     project: ProjectInput,
     short_sha: ShortShaInput,
     file_hash: HashInput,
@@ -24,7 +25,7 @@ def deploy_signed(
     signature: HashInput,
     file: Annotated[bytes, File()],
     settings: SettingsDep,
-    deploy_svc: Annotated[DeployService, Depends()]
+    deploy_svc: Annotated[DeployService, Depends()],
 ):
     message = f"project={project}&short_sha={short_sha}&file_hash={file_hash}&timestamp={timestamp}"
     h = hmac.new(settings.HMAC_SECRET.encode(), message.encode(), hashlib.sha256)
@@ -37,12 +38,23 @@ def deploy_signed(
     return {"current": short_sha}
 
 
-@router.post("/secured")
-def deploy_secured(
+@router.post("/with-token", dependencies=[Depends(authorize)])
+def deploy_with_token(
     project: ProjectInput,
     short_sha: ShortShaInput,
     file: Annotated[bytes, File()],
-    deploy_svc: Annotated[DeployService, Depends()]
+    deploy_svc: Annotated[DeployService, Depends()],
+):
+    deploy_svc.deploy(project, short_sha, file)
+    return {"current": short_sha}
+
+
+@router.post("/with-mtls")
+def deploy_with_mtls(
+    project: ProjectInput,
+    short_sha: ShortShaInput,
+    file: Annotated[bytes, File()],
+    deploy_svc: Annotated[DeployService, Depends()],
 ):
     deploy_svc.deploy(project, short_sha, file)
     return {"current": short_sha}

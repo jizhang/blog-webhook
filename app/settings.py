@@ -8,6 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env")
 
+    AUTH_TOKEN: str
     HMAC_SECRET: str
     DEPLOY_BASE: str
 
