@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, status
 from app.settings import SettingsDep
 from app.auth import authorize
 
-router = APIRouter(prefix="/deploy", )
+router = APIRouter(prefix="/deploy")
 
 ProjectInput = Annotated[str, Form(pattern=r"^[a-z][0-9a-z-]+$")]
 ShortShaInput = Annotated[str, Form(pattern=r"^[0-9a-f]{8}$")]
