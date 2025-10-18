@@ -16,8 +16,8 @@ ShortShaInput = Annotated[str, Form(pattern=r"^[0-9a-f]{8}$")]
 HashInput = Annotated[str, Form(pattern=r"^[0-9a-f]{64}$")]
 
 
-@router.post("/with-hmac")
-def deploy_with_hmac(
+@router.post("/hmac")
+def deploy_hmac(
     project: ProjectInput,
     short_sha: ShortShaInput,
     file_hash: HashInput,
@@ -38,8 +38,8 @@ def deploy_with_hmac(
     return {"current": short_sha}
 
 
-@router.post("/with-token", dependencies=[Depends(authorize)])
-def deploy_with_token(
+@router.post("/token", dependencies=[Depends(authorize)])
+def deploy_token(
     project: ProjectInput,
     short_sha: ShortShaInput,
     file: Annotated[bytes, File()],
@@ -49,8 +49,8 @@ def deploy_with_token(
     return {"current": short_sha}
 
 
-@router.post("/with-mtls")
-def deploy_with_mtls(
+@router.post("/mtls")
+def deploy_mtls(
     project: ProjectInput,
     short_sha: ShortShaInput,
     file: Annotated[bytes, File()],
