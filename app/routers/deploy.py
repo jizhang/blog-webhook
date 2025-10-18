@@ -38,18 +38,7 @@ def deploy_hmac(
     return {"current": short_sha}
 
 
-@router.post("/token", dependencies=[Depends(authorize)])
-def deploy_token(
-    project: ProjectInput,
-    short_sha: ShortShaInput,
-    file: Annotated[bytes, File()],
-    deploy_svc: Annotated[DeployService, Depends()],
-):
-    deploy_svc.deploy(project, short_sha, file)
-    return {"current": short_sha}
-
-
-@router.post("/mtls")
+@router.post("/mtls", dependencies=[Depends(authorize)])
 def deploy_mtls(
     project: ProjectInput,
     short_sha: ShortShaInput,
