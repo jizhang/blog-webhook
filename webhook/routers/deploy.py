@@ -2,12 +2,12 @@ import time
 import hmac
 import hashlib
 from typing import Annotated
-from app.services.deploy import DeployService
+from webhook.services.deploy import DeployService
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, status
 
-from app.settings import SettingsDep
-from app.auth import authorize
+from webhook.settings import SettingsDep
+from webhook.auth import authorize
 
 router = APIRouter(prefix="/deploy")
 

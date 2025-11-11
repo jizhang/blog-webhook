@@ -1,7 +1,7 @@
 [project]
-name = "blog-webhook"
-version = "0.1.0"
-description = "Add your description here"
+name = "webhook"
+version = "25.11.1"
+description = "Deployment webhook"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

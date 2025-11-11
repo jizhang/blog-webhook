@@ -3,7 +3,7 @@ import tarfile
 from io import BytesIO
 from pathlib import Path
 
-from app.settings import SettingsDep
+from webhook.settings import SettingsDep
 
 
 class DeployService:

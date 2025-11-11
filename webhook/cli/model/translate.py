@@ -5,7 +5,7 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import PromptTemplate
 
 from . import model_cli, prompts
-from app.settings import get_settings
+from webhook.settings import get_settings
 
 
 @model_cli.command()

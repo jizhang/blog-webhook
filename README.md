@@ -2,15 +2,15 @@
 
 * Development
 ```
-uv run fastapi dev app/main.py
+uv run fastapi dev webhook/main.py
 ```
 
 * Production
 ```
-uv run fastapi run app/main.py
+uvicorn --host 127.0.0.1 --port 8000 app.main:app
 ```
 
 * Command line interface
 ```
-uv run -m cli --help
+uv run -m webhook.cli --help
 ```

@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import Header, HTTPException, status
 
-from app.settings import SettingsDep
+from webhook.settings import SettingsDep
 
 
 async def authorize(authorization: Annotated[str, Header()], settings: SettingsDep):
